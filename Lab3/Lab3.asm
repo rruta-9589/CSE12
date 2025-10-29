@@ -140,11 +140,6 @@
 	#0x0a  is the ASCI code input for  newLine (/n)
 
 	
-	#START WRITING YOUR CODE FROM THIS LINE ONWARDS
-	#DO NOT  use the registers a0, a1, a7, t6, sp anywhere in your code.
-	
-	#................ your code starts here..........................................................#
-	
 	input_loop:
 		print_str(prompt)
 		read_n(t0)
@@ -182,12 +177,6 @@ start:
 		addi t1, t1, 1
 		j row_loop
 	
-
-
-	#................ your code ends here..........................................................#
-	
-	#END YOUR CODE ABOVE THIS COMMENT
-	#Don't change anything below this comment!
 Exit:	
 	#write null character to end of file
 	write_to_buffer(0x00)
