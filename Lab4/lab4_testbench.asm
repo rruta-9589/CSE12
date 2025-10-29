@@ -21,16 +21,12 @@ printB: .asciz "printing list B: \n"
 mergeMsg: .asciz "now merging A and B sorted into list A....\n\n"
 
 .macro print_str(%str)
-#DO NOT CHANGE ANY LINE OF CODE WITHIN THIS MACRO!
-	#ask user to print %str
 	li a7, 4
 	la a0, %str
 	ecall
 .end_macro
 
 .macro print_int(%reg)
-#DO NOT CHANGE ANY LINE OF CODE WITHIN THIS MACRO!
-	#ask user to print value in %reg
 	li a7, 1
 	addi a0, %reg, 0
 	ecall
@@ -45,16 +41,11 @@ mergeMsg: .asciz "now merging A and B sorted into list A....\n\n"
 main:
 
 
-#create head for out new list A
 jal createHead
-#a0 now containes pointer to head location.
-#head itself is set to NULL
 
-#the code from the file below will fill up list A
 .include "fill_list_A.asm"
 
 
-#now let's print the list:
 addi sp, sp, -4
 sw a0, 0(sp)
 print_str(printA)
@@ -64,22 +55,15 @@ addi sp, sp, 4
 lw a1, 0(a0)#argument for print_list
 li t0, 0x10000000
 sw a0, 0(t0)
-#saving A's head reference to exclusive memory section for future use
 jal print_list
 #printing list A
 
-#Now, let's create a new linked list B
 
-#create head for out new list B
 jal createHead
-#a0 now containes pointer to head location.
-#head itself is set to NULL
 
-#the code from the file below will fill up list B
 .include "fill_list_B.asm"
 
 
-#now let's print the list:
 addi sp, sp, -4
 sw a0, 0(sp)
 print_str(printB)
@@ -89,21 +73,17 @@ addi sp, sp, 4
 lw a1, 0(a0) #argument for print_list
 li t0, 0x10000004
 sw a0, 0(t0)
-#saving B's head reference to exclusive memory section for future use
 jal print_list
 #printing list B
 
-#now let us test mergeLinkedLists
 
 print_str(mergeMsg)
 
 li t0, 0x10000000
 lw a0, 0(t0)#a0= headref of A
 lw a1, 4(t0)#a1= headref of B
-#a0,a1 now have intented arguments
 jal mergeLinkedLists
 
-#print lists A and B again
 
 print_str(printAmerged)
 li t0, 0x10000000
@@ -111,7 +91,6 @@ lw a1, 0(t0)#a1= headref of A; i.e. the location in memoery where head exists
 lw a1, 0(a1)#a1= headref of A points to a1; if A is empty, a1 = 0 
 
 jal print_list
-#printing list A
 
 print_str(printB)
 li t0, 0x10000004
@@ -119,12 +98,9 @@ lw a1, 0(t0)#a1= headref of B; i.e. the location in memoery where head exists
 lw a1, 0(a1)#a1= headref of B points to a1; if A is empty, a1 = 0 
 
 jal print_list
-#printing list B
 
 exit
-#exit main
 
-#---------------------------------------------------------------------------------------------#
 createHead:
 # Function to dynamically allocate memory for the head of a new linked list
 # Outputs: a0 = pointer to the location where head exists
@@ -147,7 +123,6 @@ createHead:
 
     
 
-#---------------------------------------------------------------------------------------------# 
  .include "newNode.asm"
  .include "insertSorted.asm"
  .include "mergeLinkedLists.asm"
