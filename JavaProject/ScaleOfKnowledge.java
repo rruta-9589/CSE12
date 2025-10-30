@@ -1,5 +1,4 @@
 //Rakendu Ruta
-//5-16-22
 //ScaleOfKnowledge.java
 ///This is the work for the final week of the game project.
 ///This program tests our knowledge of everything we have learnt so far
@@ -2248,3 +2247,4 @@ class LeaderBoardPanel extends JPanel
 		}
 	}
 }
+
